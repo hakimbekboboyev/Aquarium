@@ -36,21 +36,40 @@ public class Aquarium {
 
     public synchronized void fishInteraction(Fish fish) throws InterruptedException {
         for (Fish otherFish : fishes) {
-            if (fish != otherFish && !fish.getGender().equals(otherFish.getGender())) {
-                System.out.println("Baliq #" + fish.getId() + " va Baliq #" + otherFish.getId() + " uchrashdi!");
-                spawnNewFish(fish.getId(), otherFish.getId());
-                otherFish.join(10);
+            if (fish != otherFish && !fish.getGender().equals(otherFish.getGender()) &&
+                    fish.getX_Coordinate()==otherFish.getX_Coordinate() &&
+                    fish.getY_Coordinate()==otherFish.getY_Coordinate()
+            ) {
+                System.out.println("Baliq #" + fish.getId() + " va Baliq #" + otherFish.getId() + " uchrashdi!" +
+                        " xy("+fish.getX_Coordinate()+","+fish.getY_Coordinate()+")");
+                spawnNewFish(fish.getId(), otherFish.getId(),
+                        fish.getX_Coordinate(),
+                        fish.getY_Coordinate());
+
                 break;
             }
         }
     }
 
-    private void spawnNewFish(long fishId, long otherFishId) {
+    private void spawnNewFish(long fishId, long otherFishId, int x1, int y1 ) {
         if (!isRunning) return;
         String gender = random.nextBoolean() ? "Erkak" : "Urg'ochi";
-        int lifeSpan = 5 + random.nextInt(10); // 5-15 soniya
-        Fish newFish = new Fish(gender, lifeSpan, fishId, otherFishId, this);
+        int lifeSpan = 5 + random.nextInt(100); // 5-15 soniya
+        Fish newFish = new Fish(gender, lifeSpan, x1, y1, fishId, otherFishId, this);
         addFish(newFish);
+    }
+
+
+    public synchronized void movementFish() throws InterruptedException {
+        for (Fish fish : fishes) {
+            Thread.sleep(1);
+            int random_x = 1+random.nextInt(capacity);
+            int random_y = 1+random.nextInt(capacity);
+            fish.setX_Coordinate(random_x);
+            fish.setY_Coordinate(random_y);
+
+
+        }
     }
 
     public void shutdown() {

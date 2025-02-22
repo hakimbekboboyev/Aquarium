@@ -12,20 +12,26 @@ public class Main {
 
     public static void calculateAuto() {
         Random random = new Random();
-        int aquariumSize = 7 + random.nextInt(5); // 6-11 sig'imli akvarium
+        int aquariumSize = 20 + random.nextInt(100);
         Aquarium aquarium = new Aquarium(aquariumSize);
 
-        int numMale = 1 + random.nextInt(3); // 1-3 erkak baliq
-        int numFemale = 1 + random.nextInt(3); // 1-3 urg'ochi baliq
+
+        int numMale = 5 + random.nextInt(40);
+        int numFemale = 4 + random.nextInt(40);
 
         System.out.println("Akvarium hajmi: " + aquariumSize);
         System.out.println("Akvariumda " + numMale + " ta erkak va " + numFemale + " ta urg'ochi baliq bor.");
 
         for (int i = 0; i < numMale; i++) {
-            aquarium.addFish(new Fish("Erkak", 5 + random.nextInt(10), 0,0, aquarium));
+
+            int x_Coordinate = random.nextInt(aquariumSize);
+            int y_Coordinate = random.nextInt(aquariumSize);
+            aquarium.addFish(new Fish("Erkak", 5 + random.nextInt(100), x_Coordinate, y_Coordinate, 0,0, aquarium));
         }
         for (int i = 0; i < numFemale; i++) {
-            aquarium.addFish(new Fish("Urg'ochi", 5 + random.nextInt(10), 0, 0, aquarium));
+            int x_Coordinate = random.nextInt(aquariumSize);
+            int y_Coordinate = random.nextInt(aquariumSize);
+            aquarium.addFish(new Fish("Urg'ochi",5 + random.nextInt(100), x_Coordinate, y_Coordinate,  0, 0, aquarium));
         }
     }
 
@@ -55,17 +61,20 @@ public class Main {
         }
 
         System.out.println("Akvarium hajmi: " + aquariumSize);
-        System.out.println("Akvariumda " + numMale + " ta erkak va " + numFemale + " ta urg‘ochi baliq bor.");
+        System.out.println("Akvariumda " + numMale + " ta erkak va " + numFemale + " ta urg'ochi baliq bor.");
 
         for (int i = 0; i < numMale; i++) {
-            aquarium.addFish(new Fish("Erkak", 5 + random.nextInt(10), 0, 0, aquarium));
-        }
 
+            int x_Coordinate = random.nextInt(aquariumSize);
+            int y_Coordinate = random.nextInt(aquariumSize);
+            aquarium.addFish(new Fish("Erkak", 5 + random.nextInt(100), x_Coordinate, y_Coordinate, 0,0, aquarium));
+        }
         for (int i = 0; i < numFemale; i++) {
-            aquarium.addFish(new Fish("Urg‘ochi", 5 + random.nextInt(10), 0, 0, aquarium));
+            int x_Coordinate = random.nextInt(aquariumSize);
+            int y_Coordinate = random.nextInt(aquariumSize);
+            aquarium.addFish(new Fish("Urg'ochi",5 + random.nextInt(100), x_Coordinate, y_Coordinate,  0, 0, aquarium));
         }
 
         scanner.close();
     }
-
 }
